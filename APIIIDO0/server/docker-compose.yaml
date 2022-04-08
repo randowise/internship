@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: .dockerfile
+    image: postgres
+    container_name: pro_settings-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "9003:5432"
+    environment:
+      POSTGRES_DB: pro_settings
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      PGDATA: /var/lib/postgresql/data/postgres-mvc
+    volumes:
+      - postgres-mvc:/var/lib/postgresql/data
+
+volumes:
+  postgres-mvc:
